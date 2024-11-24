@@ -1,26 +1,33 @@
+
 class Calculator:
     def add(self, a, b):
         return a + b
 
     def subtract(self, a, b):
-        return b - a
+        return a - b
 
     def multiply(self, a, b):
         result = 0
-        for i in range(b+1):
+        is_negative = b < 0
+        b = abs(b)  
+        for _ in range(b):
             result = self.add(result, a)
-        return result
+        return -result if is_negative else result
 
     def divide(self, a, b):
+        if b == 0:
+            raise ZeroDivisionError("Division by zero is not allowed!")
         result = 0
-        while a > b:
+        while a >= b:  
             a = self.subtract(a, b)
             result += 1
         return result
-    
+
     def modulo(self, a, b):
-        while a <= b:
-            a = a-b
+        if b == 0:
+            raise ZeroDivisionError("Modulo by zero is not allowed!")
+        while a >= b:  
+            a = self.subtract(a, b)
         return a
 
 # Example usage:
